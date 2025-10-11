@@ -1,7 +1,7 @@
 package com.pacosal.bank.application;
 
-import com.pacosal.bank.infraestructure.error.ErrorCode;
-import com.pacosal.bank.infraestructure.error.ErrorResultException;
+import com.pacosal.bank.application.error.ErrorCode;
+import com.pacosal.bank.application.error.ErrorResultException;
 import com.pacosal.bank.domain.Transfer;
 import com.pacosal.bank.domain.TransferMoneyUseCase;
 import com.pacosal.bank.domain.TransferResult;

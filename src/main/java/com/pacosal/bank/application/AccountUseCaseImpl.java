@@ -2,7 +2,7 @@ package com.pacosal.bank.application;
 
 import com.pacosal.bank.domain.Account;
 import com.pacosal.bank.domain.AccountUseCase;
-import com.pacosal.bank.infraestructure.error.ErrorCode;
+import com.pacosal.bank.application.error.ErrorCode;
 import com.pacosal.bank.domain.Transfer;
 import com.pacosal.bank.domain.TransferMoneyUseCase;
 import com.pacosal.bank.domain.command.CreateAccountCommand;
