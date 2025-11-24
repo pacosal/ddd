@@ -24,16 +24,17 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class AccountUseCaseServiceImpl {
 
-  @Autowired
   AccountRepository accountRepository;
-
-  @Autowired
   TransferRepository transferRepository;
 
   private AccountUseCaseImpl accountUseCaseImpl = null;
   private TransferMoneyUseCaseImpl transferMoneyUseCaseImpl = null;
 
-  public AccountUseCaseServiceImpl() {
+  
+  public AccountUseCaseServiceImpl(AccountRepository accountRepository, TransferRepository transferRepository) {
+    this.accountRepository = accountRepository;
+    this.transferRepository = transferRepository;
+
     this.transferMoneyUseCaseImpl = new TransferMoneyUseCaseImpl(transferRepository, accountRepository);
     this.accountUseCaseImpl = new AccountUseCaseImpl(transferMoneyUseCaseImpl, accountRepository);
   }

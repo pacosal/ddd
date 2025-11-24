@@ -5,6 +5,7 @@ import com.pacosal.bank.domain.Transfer;
 import com.pacosal.bank.domain.TransferMoneyUseCase;
 import com.pacosal.bank.application.AccountRepository;
 import com.pacosal.bank.application.TransferMoneyUseCaseImpl;
+import com.pacosal.bank.application.TransferRepository;
 import com.pacosal.bank.domain.command.SendMoneyCommand;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,15 +20,15 @@ import javax.validation.Valid;
 @Validated
 public class TransferMoneyUseCaseServiceImpl implements TransferMoneyUseCase {
 
-  @Autowired
-  TransferRepositoryImpl transferRepository;
-
-  @Autowired
   AccountRepository accountRepository;
+  TransferRepository transferRepository;
 
   private TransferMoneyUseCaseImpl transferMoneyUseCaseImpl = null;
 
-  public TransferMoneyUseCaseServiceImpl() {
+  public TransferMoneyUseCaseServiceImpl(AccountRepository accountRepository, TransferRepository transferRepository) {
+    this.accountRepository = accountRepository;
+    this.transferRepository = transferRepository;
+    
     this.transferMoneyUseCaseImpl = new TransferMoneyUseCaseImpl(transferRepository, accountRepository);
   }
 
