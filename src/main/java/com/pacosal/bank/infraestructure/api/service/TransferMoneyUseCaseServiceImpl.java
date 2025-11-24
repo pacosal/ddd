@@ -1,9 +1,9 @@
 package com.pacosal.bank.infraestructure.api.service;
 
-import com.pacosal.bank.infraestructure.repository.AccountRepositoryImpl;
 import com.pacosal.bank.infraestructure.repository.TransferRepositoryImpl;
 import com.pacosal.bank.domain.Transfer;
 import com.pacosal.bank.domain.TransferMoneyUseCase;
+import com.pacosal.bank.application.AccountRepository;
 import com.pacosal.bank.application.TransferMoneyUseCaseImpl;
 import com.pacosal.bank.domain.command.SendMoneyCommand;
 import lombok.extern.slf4j.Slf4j;
@@ -20,24 +20,20 @@ import javax.validation.Valid;
 public class TransferMoneyUseCaseServiceImpl implements TransferMoneyUseCase {
 
   @Autowired
-  AccountRepositoryImpl accountRepository;
-
-  @Autowired
   TransferRepositoryImpl transferRepository;
 
-  private TransferMoneyUseCase transferMoneyUseCase = null;
+  @Autowired
+  AccountRepository accountRepository;
 
-  // Crea el objeto transferMoneyUseCase para ser utilizado desde Springboot
-  public void init() {
-    if (transferMoneyUseCase == null) {
-      transferMoneyUseCase = new TransferMoneyUseCaseImpl(transferRepository, accountRepository);
-    }
+  private TransferMoneyUseCaseImpl transferMoneyUseCaseImpl = null;
+
+  public TransferMoneyUseCaseServiceImpl() {
+    this.transferMoneyUseCaseImpl = new TransferMoneyUseCaseImpl(transferRepository, accountRepository);
   }
 
   @Override
   public Transfer transferMoney(@Valid SendMoneyCommand command) {
     log.info("Transfer money with command : {}", command);
-    init();
-    return transferMoneyUseCase.transferMoney(command);
+    return transferMoneyUseCaseImpl.transferMoney(command);
   }
 }
